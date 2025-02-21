@@ -1,0 +1,28 @@
+{
+  "name": "projeto-rocketseat-api-restaurante",
+  "version": "1.0.0",
+  "description": "API de gerenciamento para um restaurante",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/matheusdcunha/api-restaurante-projeto-rocketseat.git"
+  },
+  "author": "Matheus da Cunha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/matheusdcunha/api-restaurante-projeto-rocketseat/issues"
+  },
+  "homepage": "https://github.com/matheusdcunha/api-restaurante-projeto-rocketseat#readme",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^20.14.12",
+    "tsx": "^4.16.2",
+    "typescript": "^5.5.4"
+  }
+}

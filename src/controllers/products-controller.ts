@@ -10,7 +10,7 @@ class ProductsController {
       const products = await knex<ProductRepository>("products")
         .whereLike("name", `%${name ?? ""}%`).select()
 
-      return response.json({ products })
+      return response.status(200).json({ products })
     } catch (error) {
       next(error)
     }

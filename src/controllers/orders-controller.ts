@@ -43,15 +43,48 @@ class OrdersController {
       next(error)
     }
   }
+
+  async index(request: Request, response: Response, next: NextFunction) {
+    try {
+
+      const { tables_session_id } = request.params
+
+      const order = await knex("orders")
+      .select(
+        "orders.id",
+        "orders.tables_session_id",
+        "orders.product_id",
+        "products.name",
+        "orders.price",
+        "orders.quantity",
+         knex.raw("(orders.price * orders.quantity) AS Total"),
+        "orders.created_at",
+        "orders.updated_at"
+        )
+      .join("products", "products.id", "orders.product_id")
+      .where({tables_session_id})
+      .orderBy("orders.created_at", "desc")
+
+      return response.status(200).json(order)
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async show(request: Request, response: Response, next: NextFunction){
+    try {
+      const { tables_session_id } = request.params
+
+      const order = await knex("orders").select(
+        knex.raw("COALESCE(SUM(orders.price * orders.quantity), 0) AS Total")
+      ).where({tables_session_id})
+        
+      return response.status(200).json(order)
+    } catch (error) {
+      next(error)
+    }
+  }
+
 }
 
 export {OrdersController}
-
-
-// async index(request: Request, response: Response, next: NextFunction) {
-//   try {
-    
-//   } catch (error) {
-//     next(error)
-//   }
-// }
